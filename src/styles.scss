@@ -1,0 +1,169 @@
+@use "sass:map";
+@use "reset";
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+@mixin _apply-font($font-name) {
+    $font-map: map.get($typography-map, $font-name);
+    font-size: map.get($font-map, "size");
+    font-weight: map.get($font-map, "weight");
+    letter-spacing: map.get($font-map, "letter-spacing");
+    line-height: map.get($font-map, "line-height");
+    font-family: "Roboto", sans-serif;
+}
+
+$typography-map: (
+        "title-large": (
+                "line-height": 28px,
+                "size": 22px,
+                "weight": 400,
+                "letter-spacing": normal
+        ),
+        "display-large": (
+                "line-height": 64px,
+                "size": 57px,
+                "weight": 400,
+                "letter-spacing": normal
+        ),
+        "display-medium": (
+            "line-height": 52px,
+            "size": 45px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "display-small": (
+            "line-height": 44px,
+            "size": 36px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "headline-large": (
+            "line-height": 40px,
+            "size": 32px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "headline-medium": (
+            "line-height": 36px,
+            "size": 28px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "body-large": (
+            "line-height": 24px,
+            "size": 16px,
+            "weight": 400,
+            "letter-spacing": .5px
+        ),
+        "body-medium": (
+            "line-height": 20px,
+            "size": 14px,
+            "weight": 400,
+            "letter-spacing": .25px
+        ),
+);
+
+$breakpoint-phone: 600px;
+$breakpoint-table: 840px;
+
+:root{
+    --sys-light-on-primary: #FFFFFF;
+    --sys-light-primary: #006399;
+}
+
+body{
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-template-columns: repeat(12, 1fr);
+    column-gap: 24px;
+    padding-inline: 156px;
+    position: relative;
+    overflow: hidden;
+    
+    @media(width <=#{$breakpoint-phone}) {
+        grid-template-columns: repeat(12, 1fr);
+        padding-inline: 64px;
+    }
+
+    @media(width <=#{$breakpoint-table}) {
+        grid-template-columns: repeat(8, 1fr);
+        column-gap: 24px;
+        padding-inline: 32px;
+    }
+}
+
+section {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: subgrid;
+    isolation: isolate;
+}
+
+.hero{
+    color: var(--sys-light-on-primary);
+    height: 100dvh;
+    padding-block: 36px;
+    grid-template-rows: min-content 1fr;
+
+    &__header{
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+
+        &__logo{
+            grid-column: 1 / span 2;
+        }
+
+        &__list{
+            @include _apply-font("title-large");
+            grid-column: 7 / span 6;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            span{
+                cursor: pointer;
+            }
+        }
+    }
+    &__content{
+        display: grid;
+        grid-column: 1 / span 6;
+        grid-template-rows: repeat(2, min-content);
+        padding-block: 180px;
+        gap: 128px;
+
+        &__description{
+            display: grid;
+            gap: 16px;
+
+            &__title{
+                @include _apply-font("display-large");
+            }
+
+            &__subtitle{
+                @include _apply-font("headline-large");
+            }
+        }
+
+        &__button{
+            display: grid;
+            cursor: pointer;
+            border-radius: 16px;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            width: 100%;
+            background-color: var(--sys-light-primary);
+            @include _apply-font("display-medium");
+        }
+    }
+
+    &:before{
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KFh4swPAoubYOSX3JDOwRQeMHCY-wnyItt9~aYL5P9orxPIm7D~sB2XrXxanGqmOQAmzzXToGl4nu1sEAW4myv-F0z3qYSrzNXj8yH7oycEOMBF46n~WA5KRkoIA91~2WS965jlHnqNtT4g1Rs-TJEDoKqhdTAsnVICUFpYgMZPxOwZ2xrpf2RMncjmW~KxYWfraj85P2OuaqFldwuZmo3JFoRUhx-Yk~2W7dclNCQ4CcPpqZ9aajPTpWOe~uDKiA2wkNTuXWPxcVWViavmuK-ZzFpM4zMZcv4e4g3Wnaf78SLbW6CCwb7-dZ4KEgO~SBXoCVn6lvBve~BgngUiwgw__");
+        background-size: cover;
+        background-position: right;
+        z-index: -1;
+    }
+}
