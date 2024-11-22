@@ -62,8 +62,11 @@ $typography-map: (
         ),
 );
 
-$breakpoint-phone: 600px;
-$breakpoint-table: 840px;
+$breakpoint-2xl: 1536px;
+$breakpoint-xl: 1280px;
+$breakpoint-lg: 1180px;
+$breakpoint-md: 996px;
+$breakpoint-sm: 800px;
 
 :root{
     --sys-light-on-primary: #FFFFFF;
@@ -78,15 +81,16 @@ body{
     padding-inline: 156px;
     position: relative;
     overflow: hidden;
+    min-width: 489px;
     
-    @media(width <=#{$breakpoint-phone}) {
-        grid-template-columns: repeat(12, 1fr);
+    @media(width <=#{$breakpoint-lg}) {
+        grid-template-columns: repeat(8, 1fr);
         padding-inline: 64px;
     }
 
-    @media(width <=#{$breakpoint-table}) {
-        grid-template-columns: repeat(8, 1fr);
-        column-gap: 24px;
+    @media(width <=#{$breakpoint-sm}) {
+        grid-template-columns: repeat(4, 1fr);
+        column-gap: 16px;
         padding-inline: 32px;
     }
 }
@@ -100,6 +104,7 @@ section {
 
 .hero{
     color: var(--sys-light-on-primary);
+    min-width: 490px;
     height: 100dvh;
     padding-block: 36px;
     grid-template-rows: min-content 1fr;
@@ -108,9 +113,11 @@ section {
         display: grid;
         grid-column: 1 / -1;
         grid-template-columns: subgrid;
-
+        @media(width <=#{$breakpoint-sm}) {
+            grid-template-rows: repeat(2, min-content);
+        }
         &__logo{
-            grid-column: 1 / span 2;
+            grid-column: span 2;
         }
 
         &__list{
@@ -118,18 +125,54 @@ section {
             grid-column: 7 / span 6;
             display: flex;
             flex-direction: row;
+            align-items: center;
             justify-content: space-between;
             span{
                 cursor: pointer;
+            }
+            @media(width <=#{$breakpoint-lg}) {
+                grid-column: 5 / span 4;
+            }
+            @media(width <=#{$breakpoint-sm}) {
+                grid-column: 3 / span 2;
+            }
+            @media(width <=#{$breakpoint-md}) {
+                grid-column: 4 / span 5;
+            }
+            @media(width <=#{$breakpoint-sm}) {
+                display: none;
+            }
+        }
+        &__burger-menu{
+            display: none;
+            width: 50px;
+            height: 50px;
+            @media(width <=#{$breakpoint-sm}) {
+                display: grid;
+                place-items: center;
+                place-self: right;
+                grid-column: -1;
             }
         }
     }
     &__content{
         display: grid;
-        grid-column: 1 / span 6;
+        grid-column: span 6;
         grid-template-rows: repeat(2, min-content);
         padding-block: 180px;
         gap: 128px;
+        @media(width <=#{$breakpoint-xl}) {
+            gap: 64px;
+        }
+        @media(width <=#{$breakpoint-lg}) {
+            grid-column: 1 / span 4;
+        }
+        @media(width <=#{$breakpoint-md}) {
+            grid-column: 2 / span 6;
+        }
+        @media(width <=#{$breakpoint-sm}) {
+            grid-column: span 4;
+        }
 
         &__description{
             display: grid;
