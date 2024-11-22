@@ -80,7 +80,6 @@ body{
     column-gap: 24px;
     padding-inline: 156px;
     position: relative;
-    overflow: hidden;
     min-width: 489px;
     
     @media(width <=#{$breakpoint-lg}) {
@@ -104,7 +103,6 @@ section {
 
 .hero{
     color: var(--sys-light-on-primary);
-    min-width: 490px;
     height: 100dvh;
     padding-block: 36px;
     grid-template-rows: min-content 1fr;
@@ -204,9 +202,57 @@ section {
         content: '';
         position: absolute;
         inset: 0;
+        height: 100dvh;
         background-image: url("https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KFh4swPAoubYOSX3JDOwRQeMHCY-wnyItt9~aYL5P9orxPIm7D~sB2XrXxanGqmOQAmzzXToGl4nu1sEAW4myv-F0z3qYSrzNXj8yH7oycEOMBF46n~WA5KRkoIA91~2WS965jlHnqNtT4g1Rs-TJEDoKqhdTAsnVICUFpYgMZPxOwZ2xrpf2RMncjmW~KxYWfraj85P2OuaqFldwuZmo3JFoRUhx-Yk~2W7dclNCQ4CcPpqZ9aajPTpWOe~uDKiA2wkNTuXWPxcVWViavmuK-ZzFpM4zMZcv4e4g3Wnaf78SLbW6CCwb7-dZ4KEgO~SBXoCVn6lvBve~BgngUiwgw__");
         background-size: cover;
         background-position: right;
         z-index: -1;
+    }
+}
+
+.desc{
+    display: grid;
+    padding-block: 100px;
+    @media (width <=#{$breakpoint-sm}){
+        grid-template-rows: 1fr 1fr;
+        gap: 16px
+    }
+    &__image{
+        grid-column: span 5;
+        background-image: url("https://s3-alpha-sig.figma.com/img/64af/9ae6/66d8a601f727fc4ad3e565f793de4b8d?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JCaOsGCsjjpkrWJho1Y44TZrQ2BpKLYoCSIvUVz0VlHZ0gzgVBpbyPT~Wn9wkNoTPi9XcwcrZpTXvd0pvh4lChZQ5U5VhALHt7k-0gAGF1oUdRvfTufD~-bQvIa~imHqtrvvI0KgOYQNLZWaG8ZSjXhlAquj2mVh1cqYhJyBmQi1HRVqG9GUt-lFmzSabTwdFjHDQ9U3TJ73No~wMIxnJC0MuE2JssLUrcsP~~xrlVYQL5I28u-GkDL3alngbkI7XNR7iNh9JkSc7o~0-GmOose46LGLKSfsMArR9YjA4C5G56OyRcXmGi~ZxFiyszFHh2t7VDx1ywStsqWyfUTyTA__");
+        background-size: cover;
+        border-radius: 16px;
+        background-position: center;
+        @media(width <= #{$breakpoint-lg}){
+            grid-column: span 3;
+        }
+        @media(width < #{$breakpoint-md}){
+            grid-column: span 4;
+        }
+        @media (width <= #{$breakpoint-sm}){
+        }
+    }
+
+    &__description{
+        display: grid;
+        grid-template-rows: repeat(3, min-content);
+        gap: 16px;
+        grid-column: 7 / span 6;
+        @media(width < #{$breakpoint-lg}){
+            grid-column: 5 / span 4;
+        }
+        @media(width < #{$breakpoint-md}){
+            grid-column: span 4;
+        }
+        @media (width <= #{$breakpoint-sm}){
+
+        }
+        &__title{
+            color: var(--sys-light-primary);
+            @include _apply-font("headline-medium")
+        }
+        &__paragraph{
+            @include _apply-font("body-large")
+        }
     }
 }
