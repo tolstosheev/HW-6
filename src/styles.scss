@@ -90,6 +90,9 @@ $breakpoint-sm: 800px;
     --sys-light-dark-secondary-container: light-dark(#D4E4F6,#394857);
 
     --sys-light-dark-on-secondary-container: light-dark(#0D1D2A, #D4E4F6);
+
+    --sys-light-dark-primary-container: light-dark(#CDE5FF, #004B74);
+    --sys-light-dark-on-primary-container: light0dark(#001D32, #CDE5FF);
 }
 body{
     background-color: var(--sys-light-dark-background);
@@ -313,6 +316,11 @@ section {
             background-image: url("https://s3-alpha-sig.figma.com/img/d1cb/3292/02792b3173f3cb9c1b096c4877d243dd?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=R4UWGTOeaa1y0HNMPFf6nv4V5SpQNRa~ANqqcv5Ruh8GrhJa51OOeBW7sCTbvhHdiNqaP5-1K3maEGg6MP67Q33NGbxOy1mhaz4Z1ZJ5uXYrC9C4SLLBuqvT1wcv42SelwYJIsYxOTINYsQ1gI6lILMkQuEhHZK7tgZfYk9b2JB4qml0D-Ks6swx661cUqSgT59uFz56efvIkjJj~k0KAteAEUUHbTfrEK2iqwOc~AAkfyi96aNSi4NPsWaPmtVLLcbsw6yVBCRdYlprGa9PAkqtPXpnWuiaOOSMkz9ntnLLHwO1YmVry-ScUNM5eH2WM5bCs9-JEDNaOC~dhMFGMQ__");
         }
     }
+    &--help{
+        &__image{
+            background-image: url("https://s3-alpha-sig.figma.com/img/5265/b80c/4b87bae3c9f44ff369b80d9ef2ae1e5a?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kAvEil1~HHU9Qt9E3e76Zjkghvkcal7~-goWu3yYl4r8H-cAa3kEVIidmPAniDGa58fHJRmxA1W2BVpLM0kiKkLIepIaOOZN7T2QoM8aBBkzXdnXPjLu4-ZnZGZp9ul4iOPiRg36T7L2EpdujpuRAV10nyIWUEutJBRsMQAYlgbLwb3dSdOYMF4VWmiG0yGFqPw-vrx9DlmgJ2-tOyxbJOyqwW31RxZNLAeXnC4hv01yjnijER2Zd9Nt8h0QrSL~cEz2o7KnjupiQw7x4WiHzR7CZtQsn8LPzmtXXhRnZotZcaBfUV2abFic1Kb0fj5GDQDqzlKuCbbA~39GDHziNA__");
+        }
+    }
 }
 
 .sta{
@@ -360,6 +368,63 @@ section {
         }
         &::before{
             background-color: var(--sys-light-dark-surface-variant);
+        }
+    }
+    &--call{
+        color: var(--sys-light-dark-on-primary-container);
+        background-color: var(--sys-light-dark-primary-container);
+        height: 392px;
+        &__title{
+            grid-template-rows: repeat(3, min-content);
+            gap: 16px;
+            h1{
+                @include _apply-font("display-large");
+            }
+            h3{
+                @include _apply-font("display-small");
+            }
+        }
+        &::before{
+            height: 392px;
+            background-color: var(--sys-light-dark-primary-container);
+        }
+    }
+    &--button{
+        &__title{
+            display: grid;
+            cursor: pointer;
+            border-radius: 16px;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            width: 552px;
+            background-color: var(--sys-light-primary);
+            @include _apply-font("display-medium");
+        }
+    }
+    &--logo{
+        height: 455px;
+        background-color: var(--sys-light-dark-background);
+        &::before{
+            background-color: var(--sys-light-dark-background);
+        }
+    }
+    &--production{
+        height: 150px;
+        background-color: var(--sys-light-dark-inverse-surface);
+        color: var(--sys-light-dark-inverse-on-surface);
+        &__title{
+            @include _apply-font("body-medium");
+            @media(width <=#{$breakpoint-lg}) {
+                grid-column: 8 / span 4;
+            }
+        
+            @media(width <=#{$breakpoint-sm}) {
+                grid-column: span 4;
+            }
+        }
+        &::before{
+            background-color: var(--sys-light-dark-inverse-surface);
         }
     }
 }
