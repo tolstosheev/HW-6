@@ -598,8 +598,8 @@ section {
             grid-column: 3 / span 2;
         }
     }
-    
-    &:before{
+
+    &::before{
         content: '';
         background-color: var(--sys-light-inverse-surface);
         position: absolute; 
