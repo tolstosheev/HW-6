@@ -102,7 +102,7 @@ body{
     padding-inline: 156px;
     position: relative;
     min-width: 714px;
-
+    overflow-x: hidden;
     @media(width <=#{$breakpoint-lg}) {
         grid-template-columns: repeat(8, 1fr);
         padding-inline: 64px;
