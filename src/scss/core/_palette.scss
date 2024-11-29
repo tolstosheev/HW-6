@@ -1,0 +1,22 @@
+:root{
+    --sys-light-on-primary: #FFFFFF;
+    --sys-light-primary: #006399;
+    --sys-dark-primary: #94CCFF;
+
+    --sys-light-dark-primary: light-dark(#006399, #94CCFF);
+
+    --sys-light-dark-background: light-dark(#FCFCFF, #1A1C1E);
+    --sys-light-dark-on-background:light-dark(#1A1C1E, #E2E2E5);
+
+    --sys-light-inverse-surface: #2F3033;
+    --sys-light-inverse-on-surface:#F0F0F4;
+
+    --sys-light-dark-surface-variant: light-dark(#DEE3EB, #42474E);
+    --sys-light-dark-on-surface-variant: light-dark(#42474E, #C2C7CF);
+
+    --sys-light-dark-secondary-container: light-dark(#D4E4F6,#394857);
+    --sys-light-dark-on-secondary-container: light-dark(#0D1D2A, #D4E4F6);
+
+    --sys-light-dark-primary-container: light-dark(#CDE5FF, #004B74);
+    --sys-light-dark-on-primary-container: light0dark(#001D32, #CDE5FF);
+}

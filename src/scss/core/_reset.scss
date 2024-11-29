@@ -18,6 +18,9 @@
 		color-scheme: light-dark;
 	}
 
+	body{
+		min-height: 100dvh;
+	}
 	/* Links */
 
 	a, a:link, a:visited  {
@@ -34,13 +37,15 @@
 		display: block;
 	}
 
-	h1, h2, h3, h4, h5, h6, p {
-		font-size: inherit;
-		font-weight: inherit;
+	h1, h2, h3, h4, h5, h6{
+		text-wrap: balance;
 	}
 
-	ul, ul li {
+
+	p, ul, ul li, figcaption{
 		list-style: none;
+		max-width: 65ch;
+		text-wrap: pretty;
 	}
 
 	img {

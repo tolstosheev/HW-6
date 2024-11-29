@@ -1,96 +1,21 @@
 @use "sass:map";
-@use "scss/core/reset";
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
+
+@use "scss/core/_reset";
+@use "scss/core/_palette";
+@use "scss/mixins/_window-classes";
+@use "scss/mixins/_typography";
 
 @include reset.init();
-@mixin _apply-font($font-name) {
-    $font-map: map.get($typography-map, $font-name);
-    font-size: map.get($font-map, "size");
-    font-weight: map.get($font-map, "weight");
-    letter-spacing: map.get($font-map, "letter-spacing");
-    line-height: map.get($font-map, "line-height");
-    font-family: "Roboto", sans-serif;
-}
 
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200');
 
-$typography-map: (
-        "title-large": (
-                "line-height": 28px,
-                "size": 22px,
-                "weight": 400,
-                "letter-spacing": normal
-        ),
-        "display-large": (
-                "line-height": 64px,
-                "size": 57px,
-                "weight": 400,
-                "letter-spacing": normal
-        ),
-        "display-medium": (
-            "line-height": 52px,
-            "size": 45px,
-            "weight": 400,
-            "letter-spacing": normal
-        ),
-        "display-small": (
-            "line-height": 44px,
-            "size": 36px,
-            "weight": 400,
-            "letter-spacing": normal
-        ),
-        "headline-large": (
-            "line-height": 40px,
-            "size": 32px,
-            "weight": 400,
-            "letter-spacing": normal
-        ),
-        "headline-medium": (
-            "line-height": 36px,
-            "size": 28px,
-            "weight": 400,
-            "letter-spacing": normal
-        ),
-        "body-large": (
-            "line-height": 24px,
-            "size": 16px,
-            "weight": 400,
-            "letter-spacing": .5px
-        ),
-        "body-medium": (
-            "line-height": 20px,
-            "size": 14px,
-            "weight": 400,
-            "letter-spacing": .25px
-        ),
-);
 
 $breakpoint-2xl: 1536px;
 $breakpoint-lg: 1265px;
 $breakpoint-md: 1050px;
-$breakpoint-sm: 847px;
+$breakpoint-sm: 400px;
 
-:root{
-    --sys-light-on-primary: #FFFFFF;
-    --sys-light-primary: #006399;
-    --sys-dark-primary: #94CCFF;
-
-    --sys-light-dark-primary: light-dark(#006399, #94CCFF);
-
-    --sys-light-dark-background: light-dark(#FCFCFF, #1A1C1E);
-    --sys-light-dark-on-background:light-dark(#1A1C1E, #E2E2E5);
-
-    --sys-light-inverse-surface: #2F3033;
-    --sys-light-inverse-on-surface:#F0F0F4;
-
-    --sys-light-dark-surface-variant: light-dark(#DEE3EB, #42474E);
-    --sys-light-dark-on-surface-variant: light-dark(#42474E, #C2C7CF);
-
-    --sys-light-dark-secondary-container: light-dark(#D4E4F6,#394857);
-    --sys-light-dark-on-secondary-container: light-dark(#0D1D2A, #D4E4F6);
-
-    --sys-light-dark-primary-container: light-dark(#CDE5FF, #004B74);
-    --sys-light-dark-on-primary-container: light0dark(#001D32, #CDE5FF);
-}
 body{
     --_column: 12;
     --_offset: 156px;
@@ -100,9 +25,8 @@ body{
     grid-auto-rows: min-content;
     grid-template-columns: var(--_offset) [content-start] repeat(var(--_column), 1fr) [content-end] var(--_offset);
     column-gap: 24px;
-    
-    min-width: 714px;
     overflow-x: hidden;
+    
     @media(width <=#{$breakpoint-lg}) {
         --_column: 8;
         --_offset: 64px;
@@ -149,7 +73,7 @@ section {
         }
 
         &__list{
-            @include _apply-font("title-large");
+            @include typography.typography-title-large();
             grid-column: 7 / span 6;
             display: flex;
             flex-direction: row;
@@ -203,7 +127,7 @@ section {
         }
 
         @media(width <=#{$breakpoint-md}) {
-            grid-column: 2 / span 6;
+            grid-column: span 6;
         }
 
         @media(width <=#{$breakpoint-sm}) {
@@ -215,11 +139,11 @@ section {
             gap: 16px;
 
             &__title{
-                @include _apply-font("display-large");
+                @include typography.typography-display-large();
             }
 
             &__subtitle{
-                @include _apply-font("headline-large");
+                @include typography.typography-headline-large();
             }
         }
 
@@ -232,7 +156,7 @@ section {
             height: 100px;
             width: 100%;
             background-color: var(--sys-light-primary);
-            @include _apply-font("display-medium");
+            @include typography.typography-display-medium();
         }
     }
 }
@@ -284,11 +208,11 @@ section {
 
         &__title{
             color: var(--sys-light-dark-primary);
-            @include _apply-font("headline-medium")
+            @include typography.typography-headline-medium()
         }
 
         &__paragraph{
-            @include _apply-font("body-large")
+            @include typography.typography-body-large()
         }
     }
 
@@ -363,7 +287,7 @@ section {
         grid-column: span 12;
         align-items: center;
         text-align: center;
-        @include _apply-font("display-medium");
+        @include typography.typography-display-medium();
         
         @media(width <=#{$breakpoint-lg}) {
             grid-column: span 8;
@@ -388,7 +312,7 @@ section {
             height: 100px;
             width: 552px;
             background-color: var(--sys-light-primary);
-            @include _apply-font("display-medium");
+            @include typography.typography-display-medium();
         }
     }
     &--logo{
@@ -415,7 +339,7 @@ section {
     &__title{
         grid-column: 5 / span 8;
         text-align: left;
-        @include _apply-font("body-large");
+        @include typography.typography-body-large();
 
         @media(width <=#{$breakpoint-lg}) {
             grid-column: 3 / span 6;
@@ -486,12 +410,12 @@ section {
         }
 
         &__title{
-            @include _apply-font("headline-medium");
+            @include typography.typography-headline-medium();
             color: var(--sys-light-dark-primary);
         }
 
         &__paragraph{
-            @include _apply-font("body-large");
+            @include typography.typography-body-large();
             color: var(--sys-light-dark-on-secondary-container);
         }
     }
@@ -519,18 +443,19 @@ section {
         }
 
         h1{
-            @include _apply-font("display-large");
+            @include typography.typography-display-large();
         }
 
         h2{
-            @include _apply-font("display-medium")
+            @include typography.typography-display-medium();
         }
 
         h3{
-            @include _apply-font("display-small");
+            @include typography.typography-display-small();
         }
     }
 }
+
 .production{
     height: 150px;
     background-color: var(--sys-light-inverse-surface);
@@ -543,7 +468,7 @@ section {
         width: 360px;
         grid-column: 9 / span 4;
         text-align: left;
-        @include _apply-font("body-medium");
+        @include typography.typography-body-medium();
 
         @media(width <=#{$breakpoint-lg}) {
             grid-column: 6 / span 3;

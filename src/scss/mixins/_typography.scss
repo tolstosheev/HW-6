@@ -1,0 +1,97 @@
+@use "sass:map";
+
+$typography-map: (
+        "title-large": (
+                "line-height": 28px,
+                "size": 22px,
+                "weight": 400,
+                "letter-spacing": normal
+        ),
+        "display-large": (
+                "line-height": 64px,
+                "size": 57px,
+                "weight": 400,
+                "letter-spacing": normal
+        ),
+        "display-medium": (
+            "line-height": 52px,
+            "size": 45px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "display-small": (
+            "line-height": 44px,
+            "size": 36px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "headline-large": (
+            "line-height": 40px,
+            "size": 32px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "headline-medium": (
+            "line-height": 36px,
+            "size": 28px,
+            "weight": 400,
+            "letter-spacing": normal
+        ),
+        "body-large": (
+            "line-height": 24px,
+            "size": 16px,
+            "weight": 400,
+            "letter-spacing": .5px
+        ),
+        "body-medium": (
+            "line-height": 20px,
+            "size": 14px,
+            "weight": 400,
+            "letter-spacing": .25px
+        ),
+);
+
+@mixin _private-apply-font($font-name) {
+    $font-map: map.get($typography-map, $font-name);
+    font-size: map.get($font-map, "size");
+    font-weight: map.get($font-map, "weight");
+    letter-spacing: map.get($font-map, "letter-spacing");
+    line-height: map.get($font-map, "line-height");
+    font-family: "Roboto", sans-serif;
+}
+
+@mixin typography-display-large {
+    @include _private-apply-font("display-large");
+}
+
+@mixin typography-display-medium {
+    @include _private-apply-font("display-medium");
+}
+
+@mixin typography-display-small {
+    @include _private-apply-font("display-small");
+}
+
+@mixin typography-headline-large {
+    @include _private-apply-font("headline-large");
+}
+
+@mixin typography-headline-medium {
+    @include _private-apply-font("headline-medium");
+}
+
+@mixin typography-title-large {
+    @include _private-apply-font("title-large");
+}
+
+@mixin typography-title-medium {
+    @include _private-apply-font("title-medium");
+}
+
+@mixin typography-body-large {
+    @include _private-apply-font("body-large");
+}
+
+@mixin typography-body-medium {
+    @include _private-apply-font("body-medium");
+}
