@@ -1,7 +1,8 @@
 @use "sass:map";
-@use "reset";
+@use "scss/core/reset";
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400&display=swap');
 
+@include reset.init();
 @mixin _apply-font($font-name) {
     $font-map: map.get($typography-map, $font-name);
     font-size: map.get($font-map, "size");
@@ -69,8 +70,6 @@ $breakpoint-md: 1050px;
 $breakpoint-sm: 847px;
 
 :root{
-    color-scheme: light dark;
-
     --sys-light-on-primary: #FFFFFF;
     --sys-light-primary: #006399;
     --sys-dark-primary: #94CCFF;
@@ -93,25 +92,26 @@ $breakpoint-sm: 847px;
     --sys-light-dark-on-primary-container: light0dark(#001D32, #CDE5FF);
 }
 body{
+    --_column: 12;
+    --_offset: 156px;
     background-color: var(--sys-light-dark-background);
     color: var(--sys-light-dark-on-background);
     display: grid;
     grid-auto-rows: min-content;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: var(--_offset) [content-start] repeat(var(--_column), 1fr) [content-end] var(--_offset);
     column-gap: 24px;
-    padding-inline: 156px;
-    position: relative;
+    
     min-width: 714px;
     overflow-x: hidden;
     @media(width <=#{$breakpoint-lg}) {
-        grid-template-columns: repeat(8, 1fr);
-        padding-inline: 64px;
+        --_column: 8;
+        --_offset: 64px;
     }
 
     @media(width <=#{$breakpoint-sm}) {
-        grid-template-columns: repeat(4, 1fr);
+        --_column: 4;
+        --_offset: 32px;
         column-gap: 16px;
-        padding-inline: 32px;
     }
 }
 
@@ -120,6 +120,11 @@ section {
     display: grid;
     grid-template-columns: subgrid;
     isolation: isolate;
+    & > .content{
+        grid-column: content;
+        display: grid;
+        grid-template-columns: subgrid;
+    }
 }
 
 .hero{
@@ -127,7 +132,9 @@ section {
     height: 100dvh;
     padding-block: 36px;
     grid-template-rows: min-content 1fr;
-
+    background-image: url("https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KFh4swPAoubYOSX3JDOwRQeMHCY-wnyItt9~aYL5P9orxPIm7D~sB2XrXxanGqmOQAmzzXToGl4nu1sEAW4myv-F0z3qYSrzNXj8yH7oycEOMBF46n~WA5KRkoIA91~2WS965jlHnqNtT4g1Rs-TJEDoKqhdTAsnVICUFpYgMZPxOwZ2xrpf2RMncjmW~KxYWfraj85P2OuaqFldwuZmo3JFoRUhx-Yk~2W7dclNCQ4CcPpqZ9aajPTpWOe~uDKiA2wkNTuXWPxcVWViavmuK-ZzFpM4zMZcv4e4g3Wnaf78SLbW6CCwb7-dZ4KEgO~SBXoCVn6lvBve~BgngUiwgw__");
+    background-size: cover;
+    background-position: right;
     &__header{
         display: grid;
         grid-column: 1 / -1;
@@ -228,27 +235,17 @@ section {
             @include _apply-font("display-medium");
         }
     }
-
-    &:before{
-        content: '';
-        position: absolute;
-        inset: 0;
-        height: 100dvh;
-        background-image: url("https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KFh4swPAoubYOSX3JDOwRQeMHCY-wnyItt9~aYL5P9orxPIm7D~sB2XrXxanGqmOQAmzzXToGl4nu1sEAW4myv-F0z3qYSrzNXj8yH7oycEOMBF46n~WA5KRkoIA91~2WS965jlHnqNtT4g1Rs-TJEDoKqhdTAsnVICUFpYgMZPxOwZ2xrpf2RMncjmW~KxYWfraj85P2OuaqFldwuZmo3JFoRUhx-Yk~2W7dclNCQ4CcPpqZ9aajPTpWOe~uDKiA2wkNTuXWPxcVWViavmuK-ZzFpM4zMZcv4e4g3Wnaf78SLbW6CCwb7-dZ4KEgO~SBXoCVn6lvBve~BgngUiwgw__");
-        background-size: cover;
-        background-position: right;
-        z-index: -1;
-    }
 }
 
 .desc{
     padding-block: 100px;
 
-    @media (width <=#{$breakpoint-sm}){
-        grid-template-rows: 1fr 1fr;
-        gap: 32px
+    .content{
+        @media (width <= #{$breakpoint-sm}){
+            grid-template-rows: 1fr 1fr;
+            gap: 32px
+        }
     }
-
     &__image{
         grid-column: span 5;
         background-image: url("https://s3-alpha-sig.figma.com/img/64af/9ae6/66d8a601f727fc4ad3e565f793de4b8d?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=JCaOsGCsjjpkrWJho1Y44TZrQ2BpKLYoCSIvUVz0VlHZ0gzgVBpbyPT~Wn9wkNoTPi9XcwcrZpTXvd0pvh4lChZQ5U5VhALHt7k-0gAGF1oUdRvfTufD~-bQvIa~imHqtrvvI0KgOYQNLZWaG8ZSjXhlAquj2mVh1cqYhJyBmQi1HRVqG9GUt-lFmzSabTwdFjHDQ9U3TJ73No~wMIxnJC0MuE2JssLUrcsP~~xrlVYQL5I28u-GkDL3alngbkI7XNR7iNh9JkSc7o~0-GmOose46LGLKSfsMArR9YjA4C5G56OyRcXmGi~ZxFiyszFHh2t7VDx1ywStsqWyfUTyTA__");
@@ -358,7 +355,7 @@ section {
     height: 200px;
     background-color: var(--sys-light-inverse-surface);
     color: var(--sys-light-inverse-on-surface);
-    position: relative;
+    
     place-items: center;
 
     &__title{
@@ -377,16 +374,11 @@ section {
         }
     }
 
-    &::before{
-        content: '';
-        background-color: var(--sys-light-inverse-surface);
-        position: absolute;
-        height: 200px;
-        width: 100dvw;
-        z-index: -1;
-    }
 
     &--button{
+        .content{
+            place-items: center;
+        }
         &__title{
             display: grid;
             cursor: pointer;
@@ -400,17 +392,15 @@ section {
         }
     }
     &--logo{
+        .content{
+            place-items: center;
+        }
+        background-color: var(--sys-light-dark-background);
         height: 455px;
         place-self: center;
-        background-color: var(--sys-light-dark-background);
-
         &__title{
             display: grid;
             place-self: center;
-        }
-
-        &::before{
-            background-color: var(--sys-light-dark-background);
         }
     }
 }
@@ -420,7 +410,7 @@ section {
     background-color: var(--sys-light-dark-surface-variant);
     color: var(--sys-light-dark-on-surface-variant);
     padding-block: 64px;
-    position: relative;
+    
 
     &__title{
         grid-column: 5 / span 8;
@@ -435,28 +425,18 @@ section {
             grid-column: span 4;
         }
     }
-    &:before{
-        content: '';
-        background-color: var(--sys-light-dark-surface-variant);
-        position: absolute; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%);
-        width: 100dvw;
-        height: 100%;
-        z-index: -1;
-    }
 }
 
 .info{
-    position: relative;
     background-color: var(--sys-light-dark-secondary-container);
-    row-gap: 50px;
     padding-block: 100px;
 
-    @media (width <= #{$breakpoint-sm}){
-        grid-template-rows: repeat(6, 1fr);
-        row-gap: 25px;
+    .content{
+        row-gap: 50px;
+        @media (width <= #{$breakpoint-sm}){
+            grid-template-rows: repeat(6, 1fr);
+            row-gap: 25px;
+        }
     }
 
     &__image{
@@ -515,28 +495,15 @@ section {
             color: var(--sys-light-dark-on-secondary-container);
         }
     }
-
-    &::before{
-        content: '';
-        background-color: var(--sys-light-dark-secondary-container);
-        position: absolute; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%);
-        width: 100dvw;
-        height: 100%;
-        z-index: -1;
-    }
 }
 .call{
-    position: relative;
+    padding-block: 100px;
     place-items: center;
     color: var(--sys-light-dark-on-primary-container);
     background-color: var(--sys-light-dark-primary-container);
 
     &__title{
         display: grid;
-        padding-block: 100px;
         grid-template-rows: repeat(3, min-content);
         gap: 16px;
         grid-column: span 12;
@@ -563,25 +530,13 @@ section {
             @include _apply-font("display-small");
         }
     }
-
-    &::before{
-        content: '';
-        background-color: var(--sys-light-dark-primary-container);
-        position: absolute; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%);
-        width: 100dvw;
-        height: 100%;
-        z-index: -1;
-    }
 }
 .production{
     height: 150px;
     background-color: var(--sys-light-inverse-surface);
     color: var(--sys-light-inverse-on-surface);
     padding-block: 64px;
-    position: relative;
+    
     padding-block: 45px;
 
     &__title{
@@ -597,17 +552,5 @@ section {
         @media(width <=#{$breakpoint-sm}) {
             grid-column: 3 / span 2;
         }
-    }
-
-    &::before{
-        content: '';
-        background-color: var(--sys-light-inverse-surface);
-        position: absolute; 
-        top: 50%; 
-        left: 50%; 
-        transform: translate(-50%, -50%);
-        width: 100dvw;
-        height: 100%;
-        z-index: -1;
     }
 }
