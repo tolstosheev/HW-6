@@ -31,7 +31,7 @@
             place-items: center;
         }
         &__title{
-            min-width: 552px;
+            width: 100%;
             display: grid;
             cursor: pointer;
             border-radius: 16px;
@@ -40,6 +40,16 @@
             height: 100px;
             background-color: var(--sys-light-primary);
             @include typography.typography-display-medium();
+            grid-column: 4 / span 6;
+            @include window-classes.on-expanded {
+                grid-column: 3 / span 4;
+            }
+            @include window-classes.on-medium{
+                grid-column: 2 / span 6;
+            }
+            @include window-classes.on-compact {
+                grid-column: span 4;
+            }
         }
     }
     &--logo{
