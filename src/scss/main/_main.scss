@@ -1,0 +1,42 @@
+@use "/src/scss/core/reset";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/core/palette";
+
+@include reset.init();
+
+body{
+    min-width: 560px;
+    --_column: 12;
+    --_offset: 156px;
+    --_gap: 24px;
+    background-color: var(--sys-light-dark-background);
+    color: var(--sys-light-dark-on-background);
+    display: grid;
+    grid-auto-rows: min-content;
+    grid-template-columns: var(--_offset) [content-start] repeat(var(--_column), 1fr) [content-end] var(--_offset);
+    column-gap: var(--_gap);
+    overflow-x: hidden;
+    
+    @include window-classes.on-expanded {
+        --_column: 8;
+        --_offset: 32px;
+    }
+
+    @include window-classes.on-compact{
+        --_column: 4;
+        --_offset: 16px;
+        --_gap: 16px;
+    }
+}
+
+section {
+    grid-column: 1/-1;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    & > .content{
+        grid-column: content;
+        display: grid;
+        grid-template-columns: subgrid;
+    }
+}

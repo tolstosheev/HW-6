@@ -1,0 +1,26 @@
+@use "/src/scss/core/palette";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/mixins/typography";
+
+.production{
+    height: 150px;
+    background-color: var(--sys-light-inverse-surface);
+    color: var(--sys-light-inverse-on-surface);
+    padding-block: 64px;
+    
+    padding-block: 45px;
+
+    &__title{
+        grid-column: 9 / span 4;
+        text-align: left;
+        @include typography.typography-body-medium();
+
+        @include window-classes.on-expanded {
+            grid-column: 6 / span 3;
+        }
+    
+        @include window-classes.on-compact {
+            grid-column: 3 / span 2;
+        }
+    }
+}

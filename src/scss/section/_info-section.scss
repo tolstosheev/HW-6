@@ -1,0 +1,75 @@
+@use "/src/scss/core/palette";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/mixins/typography";
+
+.info{
+    background-color: var(--sys-light-dark-secondary-container);
+    padding-block: 100px;
+
+    .content{
+        row-gap: 50px;
+        @include window-classes.on-compact{
+            grid-template-rows: repeat(6, 1fr);
+            row-gap: 25px;
+        }
+    }
+
+    &__image{
+        background-size: cover;
+        border-radius: 16px;
+        background-position: center;
+        background-image: url("https://s3-alpha-sig.figma.com/img/8b60/af22/f02d84ebb8b268ddabe0443886678db9?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=i~4Z~l15Km5kUH220R0HG1SCiXy~bLXUXlV~bgeYWUw5YLmOhfQzYqDJXCZGzUG-zgyTbtkMc1OgJLj1KKTT~-K3RTIdKTrZvHdcH8RtLuD34ADaDpVB-iQlvihP8j27rEG~tcIrYKva1PVA5-kT3fKkKTzDwSnbIvsrJn9SPpibbMBjj8owki3W~tS-9w6aLjeKjvMHulRGj6vmRnjrbH9nG~MLfT6rnj5Gqzg8g8XSLuwIQUzM2hIRgV00xWdYb~KpX6Gb4An84kZwYZuKL4K9oyzU3zUWdoCiJYqUiNhHA3j7684lLuq6NUUIqa3Z9ETzzmvTnbOocopRgvj-7Q__");
+        grid-column: 1 / span 5;
+
+        @include window-classes.on-expanded {
+            grid-column: 1 / span 3;
+        }
+
+        @include window-classes.on-medium{
+            grid-column: 1 / span 4;
+        }
+
+        @include window-classes.on-compact{
+            grid-row: 1 / span 1;
+        }
+    }
+    &__description{
+        display: grid;
+        gap: 16px;
+        grid-column: 7 / span 6;
+
+        @include window-classes.on-expanded {
+            grid-column: 5 / span 4;
+        }
+
+        @include window-classes.on-medium{
+            grid-column: span 4;
+        }
+
+        @include window-classes.on-compact{
+            gap: 8px;
+        }
+
+        &:nth-last-child(2n){
+            grid-column: 1 / span 6;
+
+            @include window-classes.on-expanded {
+                grid-column: span 4;
+            }
+            
+            @include window-classes.on-compact{
+                gap: 8px;
+            }
+        }
+
+        &__title{
+            @include typography.typography-headline-medium();
+            color: var(--sys-light-dark-primary);
+        }
+
+        &__paragraph{
+            @include typography.typography-body-large();
+            color: var(--sys-light-dark-on-secondary-container);
+        }
+    }
+}

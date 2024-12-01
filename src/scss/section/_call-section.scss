@@ -1,0 +1,39 @@
+@use "/src/scss/core/palette";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/mixins/typography";
+
+.call{
+    padding-block: 100px;
+    place-items: center;
+    color: var(--sys-light-dark-on-primary-container);
+    background-color: var(--sys-light-dark-primary-container);
+
+    &__title{
+        display: grid;
+        grid-template-rows: repeat(3, min-content);
+        gap: 16px;
+        grid-column: span 12;
+        align-items: center;
+        text-align: center;
+
+        @include window-classes.on-expanded {
+            grid-column: span 8;
+        }
+
+        @include window-classes.on-compact {
+            grid-column: span 4;
+        }
+
+        h1{
+            @include typography.typography-display-large();
+        }
+
+        h2{
+            @include typography.typography-display-medium();
+        }
+
+        h3{
+            @include typography.typography-display-small();
+        }
+    }
+}

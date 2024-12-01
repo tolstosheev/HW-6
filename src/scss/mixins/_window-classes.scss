@@ -1,25 +1,18 @@
 @use "sass:map";
 
 $_private-window-classes-map: (
-    "compact": "width < 600px",
-    "medium": "600px <= width < 840px",
-    "expanded": "840px <= width < 1200px",
-    "large": "1200px <= width < 1600px",
+    "compact": "width <= 750px",
+    "medium": "width <= 1050px",
+    "expanded": "width <= 1250px",
+    "large": "width < 1600px",
     "extra-large": "1600px <= width"
 );
 
 @mixin _private-on-window-class($window-class) {
     $media-query: map.get($_private-window-classes-map, $window-class);
+
     @media($media-query) {
         @content;
-    }
-}
-
-@mixin on-classes($window-classes) {
-    @each $window-class in $window-classes {
-        @include _private-on-window-class($window-class) {
-            @content;
-        }
     }
 }
 

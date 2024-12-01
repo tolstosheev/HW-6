@@ -1,0 +1,109 @@
+@use "/src/scss/core/palette";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/mixins/typography";
+
+.hero{
+    color: var(--sys-light-on-primary);
+    height: 100dvh;
+    padding-block: 36px;
+    grid-template-rows: min-content 1fr;
+    background-image: url("https://s3-alpha-sig.figma.com/img/5789/05ac/f6a90cb182a2ace4cb6fbef124c0b2ff?Expires=1733097600&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=KFh4swPAoubYOSX3JDOwRQeMHCY-wnyItt9~aYL5P9orxPIm7D~sB2XrXxanGqmOQAmzzXToGl4nu1sEAW4myv-F0z3qYSrzNXj8yH7oycEOMBF46n~WA5KRkoIA91~2WS965jlHnqNtT4g1Rs-TJEDoKqhdTAsnVICUFpYgMZPxOwZ2xrpf2RMncjmW~KxYWfraj85P2OuaqFldwuZmo3JFoRUhx-Yk~2W7dclNCQ4CcPpqZ9aajPTpWOe~uDKiA2wkNTuXWPxcVWViavmuK-ZzFpM4zMZcv4e4g3Wnaf78SLbW6CCwb7-dZ4KEgO~SBXoCVn6lvBve~BgngUiwgw__");
+    background-size: cover;
+    background-position: right;
+    &__header{
+        display: grid;
+        grid-column: 1 / -1;
+        grid-template-columns: subgrid;
+
+        @include window-classes.on-compact {
+            grid-template-rows: repeat(2, min-content);
+        }
+
+        &__logo{
+            grid-column: span 2;
+        }
+
+        &__list{
+            @include typography.typography-title-large();
+            grid-column: 7 / span 6;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            span{
+                cursor: pointer;
+            }
+
+            @include window-classes.on-expanded {
+                grid-column: 5 / span 4;
+            }
+
+            @include window-classes.on-medium {
+                grid-column: 4 / span 5;
+            }
+
+            @include window-classes.on-compact {
+                display: none;
+            }
+        }
+
+        &__burger-menu{
+            display: none;
+            width: 50px;
+            height: 50px;
+
+            @include window-classes.on-compact {
+                display: grid;
+                place-items: center;
+                place-self: right;
+                grid-column: -1;
+            }
+        }
+    }
+    &__content{
+        display: grid;
+        grid-column: span 6;
+        grid-template-rows: repeat(2, min-content);
+        padding-block: 180px;
+        gap: 128px;
+
+        @include window-classes.on-expanded {
+            gap: 64px;
+            grid-column: 1 / span 4;
+        }
+
+        @include window-classes.on-medium {
+            grid-column: span 6;
+        }
+
+        @include window-classes.on-compact {
+            grid-column: span 4;
+        }
+
+        &__description{
+            display: grid;
+            gap: 16px;
+
+            &__title{
+                @include typography.typography-display-large();
+            }
+
+            &__subtitle{
+                @include typography.typography-headline-large();
+            }
+        }
+
+        &__button{
+            display: grid;
+            cursor: pointer;
+            border-radius: 16px;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            width: 100%;
+            background-color: var(--sys-light-primary);
+            @include typography.typography-display-medium();
+        }
+    }
+}

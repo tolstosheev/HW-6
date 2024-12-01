@@ -1,0 +1,22 @@
+@use "/src/scss/core/palette";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/mixins/typography";
+
+.story{
+    background-color: var(--sys-light-dark-surface-variant);
+    color: var(--sys-light-dark-on-surface-variant);
+    padding-block: 64px;
+
+    &__title{
+        grid-column: 5 / span 8;
+        @include typography.typography-body-large();
+        
+        @include window-classes.on-expanded {
+            grid-column: 3 / span 6;
+        }
+    
+        @include window-classes.on-compact {
+            grid-column: span 4;
+        }
+    }
+}

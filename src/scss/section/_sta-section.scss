@@ -1,0 +1,57 @@
+@use "/src/scss/core/palette";
+@use "/src/scss/mixins/window-classes";
+@use "/src/scss/mixins/typography";
+
+.sta{
+    height: 200px;
+    background-color: var(--sys-light-inverse-surface);
+    color: var(--sys-light-inverse-on-surface);
+    
+    place-items: center;
+
+    &__title{
+        display: grid;
+        grid-column: span 12;
+        align-items: center;
+        text-align: center;
+        @include typography.typography-display-medium();
+        
+        @include window-classes.on-expanded {
+            grid-column: span 8;
+        }
+    
+        @include window-classes.on-compact {
+            grid-column: span 4;
+        }
+    }
+
+
+    &--button{
+        .content{
+            place-items: center;
+        }
+        &__title{
+            min-width: 552px;
+            display: grid;
+            cursor: pointer;
+            border-radius: 16px;
+            justify-content: center;
+            align-items: center;
+            height: 100px;
+            background-color: var(--sys-light-primary);
+            @include typography.typography-display-medium();
+        }
+    }
+    &--logo{
+        .content{
+            place-items: center;
+        }
+        background-color: var(--sys-light-dark-background);
+        height: 455px;
+        place-self: center;
+        &__title{
+            display: grid;
+            place-self: center;
+        }
+    }
+}
